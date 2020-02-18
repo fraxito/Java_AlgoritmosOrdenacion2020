@@ -27,7 +27,16 @@ public class AlgoritmosOrdenacion2020 {
         }
     }
     
-    
+    public void ordenacionInsercion(int[] numeros){
+        for (int i=2; i< numeros.length; i++){
+            int aux=numeros[i];
+            int j=0;
+            for (j = i-1; j>= 0 && numeros[j]>aux; j--){
+                numeros[j+1] = numeros[j];
+            }
+            numeros[j+1] = aux;
+        }
+    }
    
     
 
