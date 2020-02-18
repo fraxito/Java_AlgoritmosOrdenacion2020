@@ -1,6 +1,7 @@
 package algoritmosordenacion2020;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  *
@@ -9,7 +10,9 @@ import java.util.Arrays;
 public class AlgoritmosOrdenacion2020 {
 
     
-    int [] lista1 = {13, 27, 455, 621, 23, 1, 15}; 
+    int [] lista1 = {13, 27, 455, 621, 23, 1, 15};
+    int [] arrayParaBurbuja;
+    int [] arrayParaInsercion;
              
              
     public void ordenacionBurbuja(int[] numeros) {
@@ -38,6 +41,16 @@ public class AlgoritmosOrdenacion2020 {
         }
     }
    
+    //crea un array de tantos números aleatorios como
+    //le pasemos en la variable dimension
+    public int[] generaNumerosRandom (int dimension){
+        int[] numeros = new int[dimension];
+        Random r = new Random();
+        for (int i=0; i< dimension; i++){
+            numeros[i] = r.nextInt();            
+        }
+        return numeros;
+    }
     
 
     /**
@@ -53,6 +66,40 @@ public class AlgoritmosOrdenacion2020 {
         System.out.println("lista ordenada:" 
                 + Arrays.toString(ordenacion.lista1));
         
+        /////////empiezo las pruebas de rendimiento de los
+        //////// distintos algoritmos
+        int rangoPrueba = 100000;  //numero de datos con los que probamos
+        int[] numeros = ordenacion.generaNumerosRandom(rangoPrueba);
+        ordenacion.arrayParaBurbuja = new int[rangoPrueba];
+        ordenacion.arrayParaInsercion = new int[rangoPrueba];
+        for (int i=0; i<rangoPrueba; i++){
+            ordenacion.arrayParaBurbuja[i] = numeros[i];
+            ordenacion.arrayParaInsercion[i] = numeros[i];
+        }
+        //aquí ya tengo dos copias exactas del array de datos aleatorios
+        
+        System.out.println("Empieza la burbuja: (vete a por un café)");
+        long tiempoInicio = System.currentTimeMillis();
+        
+        ordenacion.ordenacionBurbuja(ordenacion.arrayParaBurbuja);
+        
+        long tiempoFinal = System.currentTimeMillis();
+        
+        System.out.println("La burbuja ha tardado: "+ (tiempoFinal - tiempoInicio));
+        
+        ///////////////////////////////////////////////////////////////////
+        
+        System.out.println("Empieza Inserción Directa: ");
+        tiempoInicio = System.currentTimeMillis();
+        
+        ordenacion.ordenacionInsercion(ordenacion.arrayParaInsercion);
+        
+        tiempoFinal = System.currentTimeMillis();
+        
+        System.out.println("La Inserción Directa ha tardado: "+ (tiempoFinal - tiempoInicio));
+        
+        ///////////////////////////////////////////////////////////////////
+               
         
     }
 
