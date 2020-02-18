@@ -13,7 +13,8 @@ public class AlgoritmosOrdenacion2020 {
     int [] lista1 = {13, 27, 455, 621, 23, 1, 15};
     int [] arrayParaBurbuja;
     int [] arrayParaInsercion;
-             
+    int [] arrayParaShell;
+    
              
     public void ordenacionBurbuja(int[] numeros) {
         //el método recibe un array de números
@@ -41,6 +42,28 @@ public class AlgoritmosOrdenacion2020 {
         }
     }
    
+    public void shellSort (int[] numeros){
+        int salto, aux; 
+        boolean intercambio;
+        for (salto = numeros.length /2; salto!= 0; salto /= 2){
+            intercambio = true;
+            while (intercambio){
+                intercambio = false;
+                for (int i= salto; i<numeros.length; i += salto){
+                    if (numeros[i - salto] > numeros[i]){
+                        //si los dos numeros están desordenados entre sí los 
+                        //intercambio y lo indico
+                        aux=numeros[i];
+                        numeros[i] = numeros[i - salto];
+                        numeros[i - salto] = aux;
+                        intercambio = true;
+                    }
+                }
+            }
+        }
+    }
+    
+    
     //crea un array de tantos números aleatorios como
     //le pasemos en la variable dimension
     public int[] generaNumerosRandom (int dimension){
@@ -72,9 +95,11 @@ public class AlgoritmosOrdenacion2020 {
         int[] numeros = ordenacion.generaNumerosRandom(rangoPrueba);
         ordenacion.arrayParaBurbuja = new int[rangoPrueba];
         ordenacion.arrayParaInsercion = new int[rangoPrueba];
+        ordenacion.arrayParaShell = new int[rangoPrueba];
         for (int i=0; i<rangoPrueba; i++){
             ordenacion.arrayParaBurbuja[i] = numeros[i];
             ordenacion.arrayParaInsercion[i] = numeros[i];
+            ordenacion.arrayParaShell[i] = numeros[i];
         }
         //aquí ya tengo dos copias exactas del array de datos aleatorios
         
@@ -100,7 +125,21 @@ public class AlgoritmosOrdenacion2020 {
         
         ///////////////////////////////////////////////////////////////////
                
+ 
         
+        ///////////////////////////////////////////////////////////////////
+        
+        System.out.println("Empieza Shell Sort: ");
+        tiempoInicio = System.currentTimeMillis();
+        
+        ordenacion.shellSort(ordenacion.arrayParaShell);
+        
+        tiempoFinal = System.currentTimeMillis();
+        
+        System.out.println("Shell Sort ha tardado: "+ (tiempoFinal - tiempoInicio));
+        
+        ///////////////////////////////////////////////////////////////////
+           
     }
 
 }
